@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>File Upload and Download</h2>
+
+@using (Html.BeginForm("Upload", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+}
+
+<br />
+
+@foreach (var file in Directory.GetFiles(Server.MapPath("~/Uploads")))
+{
+    var fileName = Path.GetFileName(file);
+    <p>
+        @Html.ActionLink("Download " + fileName, "Download", new { fileName })
+    </p>
+}
